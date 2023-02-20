@@ -1,9 +1,9 @@
-package controller;
+package spring.ren.spring.project.controller;
 
-import entities.Employee;
+import spring.ren.spring.project.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import service.EmployeeService;
+import spring.ren.spring.project.service.EmployeeService;
 
 import java.util.Optional;
 

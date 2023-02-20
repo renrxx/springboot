@@ -1,6 +1,6 @@
-package repository;
+package spring.ren.spring.project.repository;
 
-import entities.Employee;
+import spring.ren.spring.project.entities.Employee;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

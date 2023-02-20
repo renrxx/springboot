@@ -1,9 +1,9 @@
-package entities;
+package spring.ren.spring.project.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-//@Table(name = "employee")
+@Table(name = "employee")
 public class Employee {
 
     @Id

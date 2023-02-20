@@ -1,9 +1,9 @@
-package service;
+package spring.ren.spring.project.service;
 
-import entities.Employee;
+import spring.ren.spring.project.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.EmployeeRepository;
+import spring.ren.spring.project.repository.EmployeeRepository;
 
 import java.util.Objects;
 import java.util.Optional;

@@ -1,8 +1,7 @@
-package service;
+package spring.ren.spring.project.service;
 
-import entities.Employee;
+import spring.ren.spring.project.entities.Employee;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface EmployeeService {
