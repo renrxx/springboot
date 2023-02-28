@@ -1,22 +1,20 @@
 package spring.ren.spring.project.service;
 
-import spring.ren.spring.project.entities.Employee;
+import org.springframework.stereotype.Service;
+import spring.ren.spring.project.dto.EmployeeDTO;
 
-import java.util.Optional;
+import java.util.List;
 
+@Service
 public interface EmployeeService {
 
-    // Read operation
-    Iterable<Employee> getEmployee();
+    List<EmployeeDTO> getEmployees();
 
-    Optional<Employee> getEmployeeById(Long id);
+    EmployeeDTO getEmployeeById(Long id);
 
-    // Save operation
-    Employee addEmployee(Employee employee);
+    EmployeeDTO addEmployee(EmployeeDTO employee);
 
-    // Update operation
-    Employee updateEmployee(Employee employee, Long id);
+    EmployeeDTO updateEmployee(Long id, EmployeeDTO employee);
 
-    //     Delete operation
     void deleteEmployeeById(Long id);
 }

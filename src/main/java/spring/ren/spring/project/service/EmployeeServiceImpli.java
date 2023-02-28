@@ -1,12 +1,14 @@
 package spring.ren.spring.project.service;
 
-import spring.ren.spring.project.entities.Employee;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import spring.ren.spring.project.dto.EmployeeDTO;
+import spring.ren.spring.project.model.Employee;
 import spring.ren.spring.project.repository.EmployeeRepository;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpli implements EmployeeService {
@@ -14,46 +16,69 @@ public class EmployeeServiceImpli implements EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @Override
-    public Iterable<Employee> getEmployee() {
-        return employeeRepository.findAll();
+    public List<EmployeeDTO> getEmployees() {
+        List<Employee> employees = (List<Employee>) employeeRepository.findAll();
+        List<EmployeeDTO> employeeDTOs = employees.stream().map(product -> modelMapper.map(employees, EmployeeDTO.class)).toList();
+        return employeeDTOs;
+//        return productRepository.findAll().stream().map(product -> modelMapper.map(product, ProductDTO.class)).toList();
     }
 
     @Override
-    public Optional<Employee> getEmployeeById(Long id) {
-        return employeeRepository.findById(id);
+    public EmployeeDTO getEmployeeById(Long id) {
+        Employee employee = employeeRepository.findById(id).get();
+        EmployeeDTO employeeDTO = modelMapper.map(employee, EmployeeDTO.class);
+        return employeeDTO;
     }
 
     @Override
-    public Employee addEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public EmployeeDTO addEmployee(EmployeeDTO employeeDto) {
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
+        Employee savedEmployee = employeeRepository.save(employee);
+        EmployeeDTO savedEmployeeDto = modelMapper.map(savedEmployee, EmployeeDTO.class);
+        return savedEmployeeDto;
     }
 
     @Override
-    public Employee updateEmployee(Employee employee, Long id) {
+    public EmployeeDTO updateEmployee(Long id ,EmployeeDTO employee) {
 
         Employee employeeData = employeeRepository.findById(id).get();
 
-        if (Objects.nonNull(employee.getName())
+        if (Objects.nonNull(employeeData.getName())
                 && !"".equalsIgnoreCase(
-                employee.getName())) {
+                employeeData.getName())) {
             employeeData.setName(
-                    employee.getName());
+                    employeeData.getName());
         }
 
         if (Objects.nonNull(
-                employee.getDescription())
+                employeeData.getDescription())
                 && !"".equalsIgnoreCase(
-                employee.getDescription())) {
+                employeeData.getDescription())) {
             employeeData.setDescription(
-                    employee.getDescription());
+                    employeeData.getDescription());
         }
 
-        if (Objects.nonNull(employee.getAge())) {
+        if (Objects.nonNull(employeeData.getAge())) {
             employeeData.setAge(
                     employee.getAge());
         }
-        return employeeRepository.save(employeeData);
+
+        if (Objects.nonNull(
+                employeeData.getPosition())
+                && !"".equalsIgnoreCase(
+                employeeData.getPosition())) {
+            employeeData.setPosition(
+                    employeeData.getPosition());
+        }
+
+        Employee savedEmployee = employeeRepository.save(employeeData);
+        EmployeeDTO employeeDTO = modelMapper.map(savedEmployee, EmployeeDTO.class);
+
+        return employeeDTO;
     }
 
     public void deleteEmployeeById(Long id) {
