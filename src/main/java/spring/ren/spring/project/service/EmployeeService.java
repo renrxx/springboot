@@ -2,6 +2,7 @@ package spring.ren.spring.project.service;
 
 import org.springframework.stereotype.Service;
 import spring.ren.spring.project.dto.EmployeeDTO;
+import spring.ren.spring.project.exceptions.RecordNotFoundException;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface EmployeeService {
 
     EmployeeDTO addEmployee(EmployeeDTO employee);
 
-    EmployeeDTO updateEmployee(Long id, EmployeeDTO employee);
+    EmployeeDTO updateEmployee(Long id, EmployeeDTO employee)  throws RecordNotFoundException;
 
-    void deleteEmployeeById(Long id);
+    void deleteEmployeeById(Long id)  throws RecordNotFoundException ;
 }
